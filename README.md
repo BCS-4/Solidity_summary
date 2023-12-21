@@ -1,4 +1,4 @@
-# <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Solidity_logo.svg" width="35" height="35"> BCS-4 Solidity
+# <img src="https://docs.soliditylang.org/en/latest/_images/solidity_logo.svg" width="35" height="35"> BCS-4 Solidity
 
 강의내용 요약 및 코드 공유드립니다. 복습하세요!🧑‍💻
 
@@ -16,15 +16,15 @@
 
 - 2023.12.19
 
-  > 자료형(data type) : uint, string, bool, bytes
-  > 변수(variable) : 전역. 상태, 지역
+  > 자료형(data type) : uint, string, bool, bytes  
+  > 변수(variable) : 전역. 상태, 지역  
   > 배열(array) : 동적, 정적
 
 - 2023.12.20
 
-  > Review (12/19)
-  > bytes
-  > 구조체(struct)
-  > mapping
-  > 반복문 for
+  > Review (12/19)  
+  > bytes  
+  > 구조체(struct)  
+  > mapping  
+  > 반복문 for  
   > 조건문 if
