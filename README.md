@@ -14,6 +14,8 @@
 
 ## Summary
 
+### 1주차
+
 - 2023.12.19
 
   > 자료형(data type) : uint, string, bool, bytes  
@@ -28,3 +30,11 @@
   > mapping  
   > 반복문 for  
   > 조건문 if
+
+- 2023.12.21
+
+  > Review (12/20)  
+  > bitcoin whitepaper  
+  > 조건문 if  
+  > 반복문 while  
+  > 타 함수 사용해보기
