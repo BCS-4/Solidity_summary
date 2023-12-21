@@ -14,7 +14,7 @@
 
 ## 퀴즈 복습하기
 
-- 1. review.sol
+- review.sol
 
   > 숫자형 a를 선언하세요.  
   > 문자형 b를 선언하세요.  
@@ -35,7 +35,7 @@
   > push / pop / delete의 차이점을 설명하세요.  
   > 숫자형 / 문자형 / bytes형 초기값(default)은?
 
-- 2. struct.sol
+- struct.sol
 
   ```javascript
   struct Student {
@@ -52,7 +52,7 @@
   > s의 번호를 가져오는 함수를 만드세요.  
   > 이름, 번호, 점수, 학점, 2명의 학생을 만들고 2명의 학생에 각각 정보를 넣고 받아오는 함수를 만드세요.
 
-- 3. struct2.sol
+- struct2.sol
 
   > 이름, 성별, 숫자를 포함한 Student 구조체를 만드세요.  
   > Student형 배열 class를 선언하세요.  
@@ -60,7 +60,7 @@
   > class를 전체 반환하는 함수를 만드세요.  
   > class의 n번째 값을 반환하는 함수를 만드세요.
 
-- 4. structArray.sol
+- structArray.sol
 
   > Student 구조체인데, 이름, 번호, 이번학기 수강 수업들이 포함된 구조체를 만들어보세요.  
   > Student형 students 배열을 만드세요.  
@@ -71,45 +71,45 @@
   > students 배열에 값을 추가하는 함수를 만드세요.  
   > students 배열의 값을 반환하는 함수를 만드세요.
 
-- 5. mapping.sol
+- mapping.sol
 
   > 이름을 검색하여 성별을 찾을 수 있는 mapping을 설정하세요. 성별을 설정하고 성별을 알려주는 함수도 구현하세요.
 
-- 6. mapping2.sol
+- mapping2.sol
 
-```javascript
-  struct Student {
-      uint number;
-      uint score;
-      string home_address;
-  }
-```
+  ```javascript
+    struct Student {
+        uint number;
+        uint score;
+        string home_address;
+    }
+  ```
 
-> 이름으로 Student 정보를 조회할 수 있게 mapping 만들기.  
-> mapping에 정보를 넣는 함수를 만드세요.  
-> 학생 이름으로 정보 조회하는 함수를 만드세요.
+  > 이름으로 Student 정보를 조회할 수 있게 mapping 만들기.  
+  > mapping에 정보를 넣는 함수를 만드세요.  
+  > 학생 이름으로 정보 조회하는 함수를 만드세요.
 
-- 7. mapping3.sol
+- mapping3.sol
 
   > 이름으로 학생정보(구조체)를 조회할 때, 구조체에 이름이 포함될 필요가 있을까요?  
   > 포함됐을 경우와, 포함되지 않았을 경우의 가스비를 비교해보세요.
 
-- 8. mapping4.sol
+- mapping4.sol
 
   > 각 사람별로 은행마다의 잔고를 알아보는 코드를 작성해보세요. (이중 맵핑)  
   > 그럼 이름과 은행이 필요하겠죠? (string, string), 그리고 그 은행과 잔액이 필요하겠죠? (string, uint)
 
-- 9. mapping5.sol
+- mapping5.sol
 
-```javascript
-struct Student {
-        string name;
-        uint number;
-    }
-```
+  ```javascript
+  struct Student {
+          string name;
+          uint number;
+      }
+  ```
 
-> 위 struct를 사용하여 선생님이 한명의 학생을 담당하는 mapping을 만드세요. (담당 교사 일대일)  
-> 위 struct를 사용하여 선생님이 여러명의 학생을 담당하는 mapping을 만드세요. (반 담임 교사 일대다)
+  > 위 struct를 사용하여 선생님이 한명의 학생을 담당하는 mapping을 만드세요. (담당 교사 일대일)  
+  > 위 struct를 사용하여 선생님이 여러명의 학생을 담당하는 mapping을 만드세요. (반 담임 교사 일대다)
 
 - 10. quize.sol
 
