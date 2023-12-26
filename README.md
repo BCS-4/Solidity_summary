@@ -44,3 +44,13 @@
   > Array를 지역변수로 사용해보기  
   > enum  
   > 시험 (12/25 클래스매니저에게 DM으로 제출)
+
+- 2023.12.26
+
+  > require  
+  > string <-> bytes  
+  > abi.encodePacked  
+  > concat  
+  > sort  
+  > 시험1 review  
+  > 시험2 (클래스매니저에게 DM으로 제출)
