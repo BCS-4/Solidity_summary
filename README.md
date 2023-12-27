@@ -54,3 +54,14 @@
   > sort  
   > 시험1 review  
   > 시험2 (클래스매니저에게 DM으로 제출)
+
+- 2023.12.27
+
+  > 시험1 review  
+  > sort
+  > array_mapping  
+  > 시험2 review  
+  > add++ 가스비 비교  
+  > 시험3  
+  > return uint or string  
+  > constructor
