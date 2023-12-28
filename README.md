@@ -65,3 +65,13 @@
   > 시험3  
   > return uint or string  
   > constructor
+
+- 2023.12.28
+
+  > 블록체인 트릴레마: 탈중앙화, 보안, 확장성  
+  > address  
+  > msg.sender / This  
+  > payable  
+  > Goerli testnet deploy  
+  > modifier  
+  > 시험4 (enum, constructor, payable 사용하기)
