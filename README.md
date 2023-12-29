@@ -75,3 +75,11 @@
   > Goerli testnet deploy  
   > modifier  
   > 시험4 (enum, constructor, payable 사용하기)
+
+- 2023.12.29
+
+  > modifier  
+  > 시험3 review  
+  > 시험4 review  
+  > block(time)  
+  > returns
