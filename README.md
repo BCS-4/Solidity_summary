@@ -83,3 +83,17 @@
   > 시험4 review  
   > block(time)  
   > returns
+
+- ERC20
+
+  > 코드 분석해보기
+
+- visibility
+
+  > public, private, internal, external 차이점  
+  > 상속  
+  > virtual, override
+
+- web3
+
+  >
