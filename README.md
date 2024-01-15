@@ -96,4 +96,12 @@
 
 - web3
 
-  >
+  > cmd 기본 명령어  
+  > provider 설정  
+  > 블록 / 잔고 / 거래정보 / 계정 등 불러오기  
+  > 거래하기  
+  > contract 불러오기  
+  > contract 함수 실행하기  
+  > contract methodId  
+  > 상태변수 변경하기  
+  > 웹소켓
