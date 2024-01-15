@@ -165,8 +165,8 @@
 
 - truffle-config.js 수정
 
-  > 44~47번째 줄 dotenv / provider 관련 코드 주석 해제.  
-  > 85~91번째 줄 network>goerli 코드 주석 해제.
+  > 44-47번째 줄 dotenv / provider 관련 코드 주석 해제.  
+  > 85-91번째 줄 network>goerli 코드 주석 해제.
 
 - 배포하기
 

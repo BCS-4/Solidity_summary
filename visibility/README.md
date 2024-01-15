@@ -15,25 +15,25 @@
 
   > 상속 된 컨트랙트 접근하는 방법.↓
 
-```javascript
-    // VISIBILITY_1 형 vs
-    VISIBILITY_1 vs = new VISIBILITY_1();
+  ```javascript
+      // VISIBILITY_1 형 vs
+      VISIBILITY_1 vs = new VISIBILITY_1();
 
-    // 상속은, 상속된 컨트랙트의 함수명을 그대로 가져다 썼지만, 외부에서 접근할 때는 아래와 같이 접근.
-    function publicF_o() public view returns(string memory) {
-        return vs.publicF();
-    }
+      // 상속은, 상속된 컨트랙트의 함수명을 그대로 가져다 썼지만, 외부에서 접근할 때는 아래와 같이 접근.
+      function publicF_o() public view returns(string memory) {
+          return vs.publicF();
+      }
 
-    function externalF_o() public view returns(string memory) {
-        return vs.externalF();
-    }
+      function externalF_o() public view returns(string memory) {
+          return vs.externalF();
+      }
 
-    /* 아래 함수도 접근하지 못함.
-    function internalF_o() public view returns(string memory) {
-        return vs.internalF();
-    }
-    */
-```
+      /* 아래 함수도 접근하지 못함.
+      function internalF_o() public view returns(string memory) {
+          return vs.internalF();
+      }
+      */
+  ```
 
 - visibility2.sol
 
