@@ -106,6 +106,7 @@
 
 - truffle & ganache
 
+  > truffle_ganache 사용법(강사님 자료)  
   > 설치  
   > compile & migrate  
   > goerli 테스트넷 배포  
