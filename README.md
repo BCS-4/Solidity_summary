@@ -111,4 +111,5 @@
   > goerli 테스트넷 배포  
   > contract 함수 실행하기  
   > web3.js / ethers와 같이 사용하기  
-  > constructor가 있는 컨트랙트 배포하기
+  > constructor가 있는 컨트랙트 배포하기  
+  > ganache automine
