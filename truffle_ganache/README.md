@@ -309,3 +309,51 @@
     deployer.deploy(constructor3, 3, 5, "string");
   };
   ```
+
+- ganache automine
+
+  > ganache에서 automine 끄고 10초마다 생성하도록 변경해보기.  
+  > 터미널 2개 열어서 비교해보기.
+
+  ```javascript
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.19;
+
+    contract second_contract {
+      uint public A;
+
+      function add(uint _a, uint _b) public pure returns(uint) {
+        return _a + _b;
+      }
+
+      function mul(uint _a, uint _b) public pure returns(uint) {
+        return _a*_b;
+      }
+
+      function setA(uint _a) public {
+        A = _a;
+      }
+
+      function getA() public view returns(uint) {
+        return A;
+      }
+    }
+  ```
+
+  > 위 코드 배포 후 터미널 2개 열어서 각각 콘솔로 이동
+
+  ```javascript
+    truffle console
+  ```
+
+  ```javascript
+    // 첫 번째 콘솔
+    truffle(development)> let a = await second_contract.deployed()
+    truffle(development)> a.setA(5)
+
+    // 두 번째 콘솔
+    truffle(development)> let b = await second_contract.deployed()
+    truffle(development)> b.setA(7)
+  ```
+
+  > 두 코드를 동시에 실행해보기!

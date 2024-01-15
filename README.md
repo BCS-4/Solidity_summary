@@ -14,8 +14,6 @@
 
 ## Summary
 
-### 1주차
-
 - 2023.12.19
 
   > 자료형(data type) : uint, string, bool, bytes  
