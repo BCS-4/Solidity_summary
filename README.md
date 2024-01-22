@@ -114,3 +114,15 @@
   > web3.js / ethers와 같이 사용하기  
   > constructor가 있는 컨트랙트 배포하기  
   > ganache automine
+
+- NFT
+
+  > import ERC721  
+  > constructor  
+  > mint function  
+  > pinata  
+  > metadata.json  
+  > tokenURI  
+  > reveal
+
+- require / revert / assert
