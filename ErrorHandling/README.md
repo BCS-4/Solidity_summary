@@ -323,3 +323,35 @@
     > nunbers 함수에 10, 7, 5를 넣으면 안 됨. (require 때문)  
     > trycatch 함수에 10, 7, 5를 넣으면 함수는 끝까지 실행 됨.  
     > ※ 이 때, a 값은 변경되지 않고, b,c만 값이 변경 됨.
+
+### 실습
+
+> 폴더 생성  
+> truffle init  
+> contract file a.sol 생성  
+> migrations folder에 1_A.js 생성  
+> truffle-config.js에서 deployment 주석해제  
+> compile버전, 포트번호 확인
+
+> Ganache 서버포트 확인  
+> truffle-config.js 추가  
+> Ganache automine 20으로 수정  
+> truffle compile  
+> truffle migrate
+
+> truffle console
+>
+> > let a = await A.deployed()  
+> > a.methods
+
+> terminal 1개 더 열기.
+>
+> > a.Input("abc")
+> > 위 거래가 실행되면 count 값은 1임.  
+> > 그럼 터미널 2 개를 동시에 실행하면 count 값은 어떻게 될까?  
+> > 한 트랜잭션으로 묶이는가? 어디서부터 끊어지나?
+
+> 2개의 터미널에서 동시에 실행하면, 같은 block에 담기고 transactionIndex는 0, 1로 다름.  
+> Ganache 확인하기.  
+> tx1 수행 후 tx2..tx3.. 실행 함.  
+> 즉, 변화된 storage가 적용 됨.
