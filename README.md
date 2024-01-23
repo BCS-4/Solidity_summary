@@ -125,4 +125,9 @@
   > tokenURI  
   > reveal
 
-- require / revert / assert
+- Error Handling
+
+  > require / revert / assert
+  > error message  
+  > panic  
+  > try/catch
