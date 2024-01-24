@@ -128,6 +128,7 @@
 - Error Handling
 
   > require / revert / assert
+  > error code  
   > error message  
   > panic  
   > try/catch
