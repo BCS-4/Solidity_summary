@@ -310,6 +310,8 @@
     6162630000000000000000000000000000000000000000000000000000000000    // abc
   ```
 
+  ***
+
   ```javascript
     struct B {
         uint a;
@@ -350,6 +352,8 @@
     6162636465000000000000000000000000000000000000000000000000000000
   ```
 
+  ***
+
   ```javascript
     struct B_2 {
         uint a;
@@ -376,6 +380,8 @@
     6162630000000000000000000000000000000000000000000000000000000000
   ```
 
+  ***
+
   ```javascript
     struct B_3 {
         bool c;
@@ -401,6 +407,8 @@
     0000000000000000000000000000000000000000000000000000000000000003
     6162630000000000000000000000000000000000000000000000000000000000
   ```
+
+  ***
 
   ```javascript
     struct C {
@@ -429,6 +437,8 @@
     0000000000000000000000000000000000000000000000000000000000000003
     6162630000000000000000000000000000000000000000000000000000000000
   ```
+
+  ***
 
   ```javascript
     struct D {
@@ -459,6 +469,8 @@
     0000000000000000000000000000000000000000000000000000000000000003
     6465660000000000000000000000000000000000000000000000000000000000
   ```
+
+  ***
 
   ```javascript
     struct E {
@@ -492,6 +504,8 @@
     0000000000000000000000000000000000000000000000000000000000000002
     6566000000000000000000000000000000000000000000000000000000000000
   ```
+
+  ***
 
   ```javascript
     struct F {
@@ -549,6 +563,8 @@
     0000000000000000000000000000000000000000000000000000000000000001    // e 길이 1
     6500000000000000000000000000000000000000000000000000000000000000    // e
   ```
+
+  ***
 
   ```javascript
     struct G {
@@ -656,6 +672,8 @@
     2: string: _s2 b
   ```
 
+  ***
+
   ```javascript
     function decode2(bytes memory data) public pure returns(bytes memory _b1, uint _n, bytes memory _b2) {
         (_b1, _n, _b2) = abi.decode(data, (bytes, uint, bytes));
@@ -667,12 +685,22 @@
   > >
 
   ```javascript
+    0: bytes: _b1 0x61
+    1: uint256: _n 12
+    2: bytes: _b2 0x62
+  ```
+
+  ***
+
+  ```javascript
     function decode3(bytes memory data) public pure returns(bytes1 _b1, uint _n, bytes1 _b2) {
         (_b1, _n, _b2) = abi.decode(data, (bytes1, uint, bytes1));
     }
   ```
 
   > 위 encode 함수의 bytes 코드 입력하면 실행 안 됨. length 안 맞음.
+
+  ***
 
   ```javascript
     function decode4(bytes memory data) public pure returns(uint _n1, uint _n2, uint _n3, uint _n4, uint _n5, uint _n6, uint _n7) {
@@ -693,6 +721,8 @@
     5: uint256: _n6 1
     6: uint256: _n7 44326659161160106060585767698638339725079916004815528421354856378029244940288
   ```
+
+  ***
 
   ```javascript
     function decode5(bytes memory data) public pure returns(bytes32 _n1, bytes32 _n2, bytes32 _n3, bytes32 _n4, bytes32 _n5, bytes32 _n6, bytes32 _n7) {
