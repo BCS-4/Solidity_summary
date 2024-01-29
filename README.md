@@ -138,3 +138,14 @@
   > bytes / encode / encodePacked  
   > 자료형 별 결과 값  
   > encode / decode
+
+- event
+
+  > 환경준비  
+  > eventemit.txt  
+  > event.sol  
+  > filter
+
+- Hardhat
+
+  > 실습 가이드 확인

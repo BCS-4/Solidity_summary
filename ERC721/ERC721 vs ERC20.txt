@@ -1,0 +1,145 @@
+각 토큰의 id가 있다는 것이 차이점임.
+
+ERC20에는 토큰 몇개를 해줄건지가 있음 approve
+ERC721은 non-fungible이라 각 토큰id를 보기 때문에, 그 컨트랙트의 토큰을 모두 approve 하기 위해서 approveForAll 이 있음.
+
+ERC721의 포인트는
+- Non-fungible 하고, 코드를 봐야 함.
+정보를 블록체인스럽게 저장하기 위해 ipfs(pinata)의 도움을 받아야 함.(메타데이터)
+
+----------------------------------------------------------------
+
+methodID.sol
+https://goerli.etherscan.io/address/0xf2fe13e7be5edd4617fdce1b1f62ecb9ecfa9721#writeContract
+
+methodID를 결정하는 2가지 요소
+- 함수이름
+- 인풋값의 갯수
+
+contract A {
+    uint a;
+    string b;
+
+    function ABC(uint _a) public {
+        a = _a;
+    }
+
+    function ABC(string memory  _b) public {
+        b = _b;
+    }
+}
+
+인풋값의 타입이 달라져서 오류가 발생하지 않는 것임.
+
+-------------------------------------------------------------------
+위 링크에서 methodID를 복사해두자
+deposit (0xd0e30db0)
+setA (0xee919d50)
+withdraw_1 (0xc035340c)
+withdraw_all (0xdd473d2b)
+
+
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >= 0.8.2 <0.9.0;
+
+contract A {
+    uint a;
+    string b;
+
+    function ABC(uint _a) public {
+        a = _a;
+    }
+
+    function ABC(string memory  _b) public {
+        b = _b;
+    }
+
+    function getMethodId(string calldata _a) public pure returns(bytes4) {
+        return bytes4(keccak256(bytes(_a)));
+    }
+}
+
+위 코드를 배포 후, getMethodId에 "setA(uint256)" 값을 넣으면 methodId가 똑같이 나옴.
+-----------------------------------------------------------------------
+
+
+그럼 여기서도 해보자. (USDT)
+https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7#writeContract
+
+addBlackList (0x0ecb93c0)
+getMethodId 함수에 "addBlackList(address)" 값을 넣으면 똑같이 나옴
+
+methodID를 selector라고도 함.
+
+
+---------------------------------------------------------------------------
+selector를 이용해서 methodID를 받을 수도 있음.
+
+contract ADDRESS_CONSTRUCTOR2 {
+    address payable owner;
+
+    constructor() {
+        owner = payable(msg.sender);
+    }
+
+    uint a;
+
+    function setA(uint _a) public {
+        a = _a;
+    }
+
+    function getA() public view returns(uint) {
+        return a;
+    }
+
+    function add(uint _a, uint _b) public pure returns(uint) {
+        return _a+_b;
+    }
+
+    function add2(uint _a) public view returns(uint) {
+        return _a+a;
+    }
+
+    function getOwner() public view returns(address) {
+        return owner;
+    }
+
+    function deposit() public payable {}
+
+    function withdraw_1() public {
+        owner.transfer(1 ether);
+    }
+
+    function withdraw_all() public {
+        owner.transfer(address(this).balance);
+    }
+
+    function getMethodId() public pure returns(bytes4) {
+        return this.setA.selector;
+    }
+}
+
+getMethodId()를 실행해보면 알 수 있음.
+
+-------------------------------------------------------------------
+https://eips.ethereum.org/EIPS/eip-165
+
+---------------------------------ERC721.sol----------------------------------
+
+using Strings for uint256;
+여기서 using은 뭘까? 그냥 궁금하니까 알아보기
+
+ERC20에서는 address => uint 형태였음.(누가 얼마있음)
+ERC721에서는 mapping이 tokenId 는 누구껀지 되어 있음. (26번째)
+구조가 조금 다름
+
+balanceOf를 보면 특정 account가 어떤 nft르 들고있는지는 모름. 갯수만 알수있음. (기본적으로 불가능함)
+
+※ 근데 오픈씨는 새로운 nft를 감지해서 띄어줌. 어떻게하는걸까?
+=> 지갑이 로그인하면 그 지갑이 최근 event / transfer를 훑어보고 그 거래 해쉬를 봐서 contract address를 가져옴. (이런 방법으로 함)
+
+
+
+
+
+

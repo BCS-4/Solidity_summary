@@ -1,0 +1,257 @@
+환경준비
+
+폴더 생성, npm init, install web3
+infura wss key 준비
+powershell 켜놓기
+
+infura key
+wss://goerli.infura.io/ws/v3/""
+wss://mainnet.infura.io/ws/v3/""
+
+특정 이벤트 받아오기
+filter 걸기(특정 값일 때 받아오기)
+-------------------------------------------------------------------------------------------
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract EVENT_EMIT {
+    event ADD(string add, uint result);
+    event SUB(string sub, uint result);
+    event MUL(string mul, uint result);
+    event DIV(string div, uint result);
+
+    function add (uint _a, uint _b) public returns(uint _c) {
+        _c = _a + _b;
+        emit ADD("Plus", _c);
+    }
+
+    function sub(uint _a, uint _b) public returns(uint _c) {
+        _c = _a - _b;
+        emit SUB("Minus", _c);
+    }
+
+    function mul(uint _a, uint _b) public returns(uint _c) {
+        _c = _a * _b;
+        emit MUL("Times", _c);
+    }
+
+    function div(uint _a, uint _b) public returns(uint _c) {
+        _c = _a / _b;
+        emit DIV("Divided", _c);
+    }
+}
+
+
+contract indexed_event {
+    event index_1(uint indexed _num, string _name);
+
+    function event_1(uint _n, string memory _s) public {
+        emit index_1(_n, _s);
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+EVENT_EMIT CA : 0xc8D8444Cb0026889bcf5420f8e083d1D3bB7508C
+EVENT_EMIT ABI : 
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "add",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "result",
+				"type": "uint256"
+			}
+		],
+		"name": "ADD",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "div",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "result",
+				"type": "uint256"
+			}
+		],
+		"name": "DIV",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "mul",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "result",
+				"type": "uint256"
+			}
+		],
+		"name": "MUL",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "sub",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "result",
+				"type": "uint256"
+			}
+		],
+		"name": "SUB",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_a",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_b",
+				"type": "uint256"
+			}
+		],
+		"name": "add",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_c",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_a",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_b",
+				"type": "uint256"
+			}
+		],
+		"name": "div",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_c",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_a",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_b",
+				"type": "uint256"
+			}
+		],
+		"name": "mul",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_c",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_a",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_b",
+				"type": "uint256"
+			}
+		],
+		"name": "sub",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "_c",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+-----------------------------------------------------------------------------------------------
+> var {Web3} = require('web3')
+> var web3 = new Web3('wss://goerli.infura.io/ws/v3/apiKey')
+> var c_addr = '0xc8D8444Cb0026889bcf5420f8e083d1D3bB7508C'
+> var abi = abi넣기
+
+> var contract = new web3.eth.Contract(abi, c_addr)
+> contract.events 로 확인 (ADD, DIV, MUL, SUB, allEvents)
+
+※ CA와 ABI가 일치하지 않더라도 ABI 기준으로 contract.events를 하면 출력 됨. 하지만 컨트렉트 실행 불가.
+
+> contract.events.ADD().on('data', function(event) {console.log(event)})
+> contract.events.MUL().on('data', function(event){console.log("MUUUUUUUUUUUUUUUUUUL", event)})
+
+
+어카운트 생성하기
+개인키 : ""
+
+> var privateKey = '0x개인키'
+> var account = web3.eth.accounts.privateKeyToAccount(privateKey)
+
+
+
+
+
+

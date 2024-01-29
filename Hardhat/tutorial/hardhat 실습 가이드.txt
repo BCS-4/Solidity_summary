@@ -1,0 +1,265 @@
+※ Hardhat 실습 순서
+
+환경설정
+- 폴더생성 및 이동
+> wsl
+> wsl --install
+> git -v
+> wsl
+> sudo apt update && sudo apt install nodejs
+> node -v (버전 나오는지 확인)
+> npm -v
+> sudo apt install npm
+
+> npm init
+> npm install --save-dev hardhat
+> npm install --save-dev @nomicfoundation/hardhat-toolbox
+
+----------
+contracts/Lock.sol 수정
+
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.9;
+
+// Uncomment this line to use console.log
+// import "hardhat/console.sol";
+
+contract Lock {
+    uint public a = 10;
+    string public b = "abc";
+    bytes1 public c = 0x12;
+
+    uint public d;
+
+    function add(uint _a, uint _b) public pure returns(uint) {
+        return _a+_b;
+    }
+
+    function getBC() public view returns(string memory, bytes1) {
+        return(b, c);
+    }
+
+    function setD(uint _d) public {
+        d = _d;
+    }
+
+    function testB(string memory _b) public view returns(string memory) {
+        return string(abi.encodePacked(b, _b));
+    }
+}
+----------
+
+scripts/deploy.js 코드 수정
+
+// We require the Hardhat Runtime Environment explicitly here. This is optional
+// but useful for running the script in a standalone fashion through `node <script>`.
+//
+// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
+// will compile your contracts, add the Hardhat Runtime Environment's members to the
+// global scope, and execute the script.
+const hre = require("hardhat");
+
+async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log("contract deployers : ", deployer.address);
+
+  const contract = await ethers.deployContract("Lock");
+  console.log("contract address : ", await contract.getAddress());
+}
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+
+----------
+컴파일
+> npx hardhat compile
+
+----------
+test/Lock.js코드 수정 (나머지 주석처리)
+
+const {
+  time,
+  loadFixture,
+} = require("@nomicfoundation/hardhat-toolbox/network-helpers");
+const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
+const { expect } = require("chai");
+
+describe("Lock", function () {
+  // We define a fixture to reuse the same setup in every test.
+  // We use loadFixture to run this setup once, snapshot that state,
+  // and reset Hardhat Network to that snapshot in every test.
+
+  it("output should be abcxyz with input of xyz", async function () {
+    const contract = await ethers.deployContract("Lock");
+    const res = "abcxyz";
+    expect(await contract.testB("xyz")).to.equal(res);
+  });
+
+  it("output of should be abyxyz with unput of xyz", async function () {
+    const contract = await ethers.deployContract("Lock");
+    const res = "xyzabc";
+    expect(await contract.testB("xyz")).to.equal(res);
+  });
+});
+
+----------
+npx hardhat test
+> 1 passing, 1failing 확인 됨.
+
+error code
+1) Lock
+       output of should be abyxyz with unput of xyz:
+
+      AssertionError: expected 'abcxyz' to equal 'xyzabc'
+      + expected - actual
+
+      -abcxyz
+      +xyzabc
+
+
+----------
+Lock.sol 수정 (import 주석해제, testB 함수에 console.log("getting result"); 작성)
+
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.9;
+
+// Uncomment this line to use console.log
+import "hardhat/console.sol";
+
+contract Lock {
+    uint public a = 10;
+    string public b = "abc";
+    bytes1 public c = 0x12;
+
+    uint public d;
+
+    function add(uint _a, uint _b) public pure returns(uint) {
+        return _a+_b;
+    }
+
+    function getBC() public view returns(string memory, bytes1) {
+        return(b, c);
+    }
+
+    function setD(uint _d) public {
+        d = _d;
+    }
+
+    function testB(string memory _b) public view returns(string memory) {
+        console.log("getting result");
+        return string(abi.encodePacked(b, _b));
+    }
+}
+
+----------
+npx hardhat compile
+npx hardhat test
+----------
+console.log결과 확인
+
+  Lock
+getting result
+    ✔ output should be abcxyz with input of xyz (2389ms)
+getting result
+    1) output of should be abyxyz with unput of xyz
+
+
+  1 passing (2s)
+  1 failing
+
+  1) Lock
+       output of should be abyxyz with unput of xyz:
+
+      AssertionError: expected 'abcxyz' to equal 'xyzabc'
+      + expected - actual
+
+      -abcxyz
+      +xyzabc
+
+----------
+
+※ Goerli에 배포하기
+준비 : infura api 키, 개인키
+
+----------
+hardhat.config.js 수정
+
+
+require("@nomicfoundation/hardhat-toolbox");
+
+// sepolia로 테스트 함
+const INFURA_API_KEY = "";
+const pvk = "";
+
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.19",
+
+  networks: {
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`, // provider
+      accounts: [pvk], // signer
+    },
+  },
+};
+
+----------
+배포하기 (deploy.js)
+> npx hardhat run scripts/deploy.js --network sepolia
+
+결과
+contract deployers :  0x7809e03Ed0458782182045C107057b7577783510
+contract deployers :  0x7809e03Ed0458782182045C107057b7577783510
+contract address :  0x9149ABd1BF4d53bF168F999530e29A375aF10673
+
+https://sepolia.etherscan.io/ 에서 확인해보기
+
+----------
+※ etherscan에서 Contract verify 하기
+
+1) etherscan api key 생성
+> etherscan.io 에서 sign in
+> API Keys -> API Keys 생성
+SAGCI2NHHGNT12FX8PMN791I2395GC899F
+
+
+2) hardhat.config.js 수정하기
+require("@nomicfoundation/hardhat-toolbox");
+
+// sepolia로 테스트 함
+const INFURA_API_KEY = "418d77dbf67944c9b5373f85b53df36a";
+const pvk = "edb37b575ac293aea7aef29aff8ff66dc3f41fe4cc325abd4eaa1ddb77e44a53";
+
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.19",
+
+  networks: {
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`, // provider
+      accounts: [pvk], // signer
+    },
+  },
+
+  etherscan: {
+    apiKey: "SAGCI2NHHGNT12FX8PMN791I2395GC899F",
+  },
+};
+
+
+3) 명령어
+> npx hardhat verify --network sepolia 컨트랙트주소
+etherscan에서 verify 확인하기.
