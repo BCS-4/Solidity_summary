@@ -77,6 +77,11 @@
   > > fragments : methods Id  
   > > runnder.address : deploy account
 
+  > const [deployer] = await ethers.getSigners()
+  >
+  > > deployer  
+  > > deployer.address
+
   > const contract = await ethers.deployContract("Lock")
   >
   > > contract  
@@ -90,7 +95,24 @@
   > > contract.d().then(console.log) : uint public d 확인(결과 0)  
   > > contract.getAdd_2(4, 5).then(console.log) : getAdd_2(4,5) 실행 후 d 확인해보면 값이 9로 변경 되어 있음 확인 (※ 상태변수 변경해서 돈을 사용했는데 node 터미널에서 나타나지 않음)
 
-  > const [deployer] = await ethers.getSigners()
+- (이어서) contract 확인 2
+
+  > npx hardhat console --network localhost  
+  > var Lock = await ethers.getContractFactory("컨트랙트이름")
   >
-  > > deployer  
-  > > deployer.address
+  > > Lock을 선언하면 아래와 같은 결과물이 node 터미널에서 출력 됨.  
+  > > eth_getTransactionByHash  
+  > > eth_accounts  
+  > > hardhat_metadata (20)
+
+  > var lock = await Lock.attach("컨트랙트 주소")
+  >
+  > > lock.interface.fragments
+
+  > 이제 함수 호출 시 노드 터미널에서 확인 가능.
+  >
+  > > lock.add(3,4).then(console.log)  
+  > > lock.getString("abc").then(console.log)  
+  > > lock.getAdd_2(10, 20).then(console.log)  
+  > > call 함수는 From, To 확인  
+  > > ※ 돈을 사용하는 함수를 실행하면 Tx, From, To, Value, Gas used, Block 확인 가능
