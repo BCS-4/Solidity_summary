@@ -148,4 +148,7 @@
 
 - Hardhat
 
-  > 실습 가이드 확인
+  > tutorial (실습 가이드 확인)  
+  > 실습2 (240130 폴더)  
+  > hardhat deploy & verify with constructor  
+  > local testnet
