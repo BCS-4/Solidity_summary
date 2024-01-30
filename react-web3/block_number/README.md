@@ -4,7 +4,7 @@
 
 - App.js
 
-  > infura api key 는 src 상위 폴더에 .env 생성해서 관리
+  > infura api key 는 src 폴더와 동일 레벨에 .env 생성해서 관리
 
   ```javascript
   import { useState, useEffect } from "react";
@@ -38,7 +38,7 @@
 
 - App.js
 
-  > privateKey(pvKey)는 src 상위 폴더에 .env 생성해서 관리
+  > privateKey(pvKey)는 src 폴더와 동일 레벨에 .env 생성해서 관리
 
   ```javascript
   import { useState, useEffect } from "react";
